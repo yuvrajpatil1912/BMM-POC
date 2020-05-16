@@ -1,0 +1,59 @@
+<form #parameterEvalForm="ngForm" (ngSubmit)="submitForm(parameterEvalForm)">
+  <div class="form-backgroundcolor">
+    <div class="form-group">
+      <span class="parameters-form-title">
+        BMM Evaluation
+      </span>
+
+      <!-- Radio button groups -->
+      <div *ngFor="let paramater of ParameterList">
+        <div class="wrap-radio-div">
+          <label>
+            <b>{{ paramater.parameterName }}</b>
+          </label>
+          <div
+            *ngFor="let option of paramater.parameterOptions"
+            class="radio-item"
+          >
+            <label class="radioContainer">
+              <input
+                ngModel
+                required
+                type="radio"
+                [name]="paramater.className"
+                [value]="option.weight"
+              />
+              <span class="circle"></span>
+              {{ option.name }}
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- The submit button  -->
+      <div class="wrapper">
+        <button
+          class="btn btn-primary btn-alignment"
+          [disabled]="!parameterEvalForm.valid"
+        >
+          Submit
+        </button>
+      </div>
+
+      <!-- The result div goes here -->
+      <div *ngIf="result_score != null" class="wrap-radio-div">
+        <label> Result: &nbsp; </label
+        ><label
+          ><b>{{ result_category }}</b></label
+        ><br />
+      </div>
+
+      <div class="featureimage" *ngIf="result_image != null">
+        <img
+          [src]="result_image"
+          style="width: 90%; max-width: 900px; height: 600px;"
+        />
+      </div>
+    </div>
+  </div>
+</form>
